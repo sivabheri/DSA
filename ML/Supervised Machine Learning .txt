@@ -1,0 +1,233 @@
+Supervised Machine Learning :
+
+
+Regression :
+
+
+1 . Linear Regression Model :
+ 
+      Example : Housing prices prediction 
+ Here , in this example we are going to use a data set on house sizes and prices . 
+We need to estimate the price of a certain house based on the data we provide . So, we can build a Linear regression model form this dataset .
+ Your model wili fit a straight line to the data , based on this we can train the model .
+
+Notations for describing the data :
+  
+ 1. Traing set : The dataset that is used to train the model .
+ 
+ 2. x : Input variable aka. Feature or an input feature .
+ 
+ 3. y : Target variable , which denotes the output variable  which we are trying to predict .
+
+ 4. m : Total number of  training examples used .
+
+ 5. (x , y) : to indicate the single training example .
+
+ ( x^i , y^i )  : Here 'i' indicates the index of the training set and refers to row 'i' in the table .  
+
+
+Function : Both the input variable and output(target) variable will generate some funtion "f" .
+ 
+ The function 'f' is called the model .
+
+ X is called the input or input feature .
+
+ y-hat (y^) : The output of the model is the "prediction" . The model's prediction is estimated value of 'y' .
+
+  The formula to compute f  is : 
+        
+              f_w,b(X) = wX + b 
+                    ( or )
+                f(X) = wX + b
+
+ This represents the Linear regression with One variable . Also called as , Univariate linear regression .
+ 
+   
+
+
+
+
+
+  Cost Function Formula :
+
+     It predicts the model prediction (y^) and actural true value (y) .
+
+ =>   y^(i)  = f_w,b(x*(i))
+
+ =>  f_w,b(x*(i)) = wx*(i) + b
+
+ So ,  The cost function : Squared error cost function 
+
+   J(w ,b ) = 1/2m * sigma(1->m) ( y^(i) - y(i) )**2
+
+ m = number of training examples
+
+
+ j(w , b)b = 1/2m sigma(1->) (f_w,b(x(i)) - y(i))**2
+
+
+
+ simplified version of cost function 
+
+f_w (x) = wx    ,  b = empty set (phi) 
+
+
+
+Gradient  Descent :
+
+used for minimising the cost function
+
+ie, for linear regression or any function.
+
+outline :
+
+Srart with some w,b => set w=0 , b =0
+keep changing wmb to reduce j(w,b) Until we settle ar or near a minimum .
+
+
+How to implemment :
+
+algorithm :
+
+repear until covergence {
+
+	w = w - alpha * d/dw *j(w,b)
+
+	b = b - alpha * d/db *j(w,b)
+}
+
+here alpha = learning rate
+
+Learning rate in Gradient descent :
+
+if alpha is too small : Gd may be slow.
+
+if alpha is too large : Gd may be :
+	- Overshoot , never reavh minimum 
+	- fial to converge, diverge
+
+SO, we can replace the derivate part with the following , rewirting the above formula.
+
+repear until covergence {
+
+	w = w - alpha * 1/m sigma(1->m) (f_w,b(x(i)) - y(i)) * x(i)
+
+	b = b - alpha * 1/m sigma(1->m) (f_w,b(x(i)) - y(i))
+
+}
+
+
+Week 2 :
+
+Gd
+if we have muliple features the we can use vectorization to find the cost .
+
+An alternative to Gd :
+
+=> Normal eqn :
+ . Only for linear regression
+ . Solve for w,b without iterations
+
+ => Disadvantages :
+  . Doesn't generalize to other learning algortihms
+  . Slow when no of features is large (>1ok)
+
+ => What you need to know :
+ . Normal eqn method may be used in machine learning libraries that implement linear regression.
+ . Gd is the recommended method for finding parameters w,b
+
+
+Feature Engineering :
+
+Using intution to design new fearures , by transforming or combining original features.
+
+
+
+ 
+Logistic Regression :
+
+     It is used in predicting the outputs of the classification models where we determine the output from the probability of cost formula . 
+
+
+for example :
+	
+ 	To identify whether a tumor is malignant or benign . we plot a graph with tumor size on x-axis and where y-axis shows 0 or 1 i.e; 0 => tumor is benign and 1 => tumor is milignant .
+
+Point to remember : Since the prediction values may not always lies on y=1 and y=0 . There may be a probability that the values may fall between 0 and 1 .
+
+To predict the output for those values we use logistic regression which determines the output by the threshold value .
+
+Interpertation of logistic regression output :
+
+fw,b(x) = 1 / (1+ e^-1(w.x + b))
+
+which gives the probability .
+
+Example :
+	x is "tumor size"
+	y is 0 (not malignant)
+	  or 1(malignant)
+
+	fwb(x) = 0.7
+	70% chance that y is 1 
+
+logistic regression uses Sigmoid function which is also known as Logistic function. 
+
+
+The sigmoid funtion which maps all input values between 0 and 1 .
+
+Formula for Sigmoid function :
+
+	g(z)  = 1 / ( 1 + e^-1(z) )
+
+	0 < g(z) < 1
+
+
+Decision Boundary :
+
+	It is the seperator above which the values fall under positive region or close to 1 .
+Below which the values fall under negative region or close to 0 .
+
+	fwb(x) = g(z) =g(w1x1 + w2x2 + b)
+
+	Db : z = w.x + b = 0
+
+Non-linear Decison boundaries ;
+
+    	There is a probability that the curve may not be a straight line .
+
+	fwb(x) = g(w1(x1*2) +w2(x2*2) +b)
+
+	let w1=w2=1 and b=-1
+	
+	z = x1*2 + x2*2-1= 0 => x1*2+x2*2 =1
+
+In such cases , we may even can get complex boundaries . so the curve any thing .
+
+
+
+Cost function for logistic regression :
+
+	. which is non-convex .
+Logistic loss function :
+
+		  -log(fwb(xi))   if yi=1
+L(fwb(xi),yi)=
+		  -log(1-fwb(xi)) if yi=0
+
+
+Simplified loss function for logistic reg:
+
+	l(fwb(xi,yi)) = -yi.log(fwb(xi))-(1-yi)log(1-fwb(xi))
+
+it is valid for both 0 and 1.
+
+
+
+Gradient Descent Implementation:
+
+	wj = wj- alpha[ 1/m . sigma(1=>m) (fw,b(xi)-yi)xj(i)]
+
+	b = b - alpha[ 1/m . sigma(1=>m) (fw,b(xi)-yi)]
+
+

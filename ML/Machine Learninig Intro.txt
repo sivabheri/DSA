@@ -1,0 +1,61 @@
+Machine Learninig:
+
+Definition : The field of study that gives computers the ability to learn without being explicitly programmed. - Arthur Samuel.
+
+ Types :
+1 . Supervised Learning
+2 . Unsupervised Learning
+
+GenralY supervised learning is used most in real-world applications which have rapid advancements.
+Under this there are 2 main courses.
+
+Then the other course, which will give us deep insights about unsupervised machine learing , reinforcement learning and recommeder systems.
+
+
+
+Supervised Learning :
+
+	It refers to algorithms that learn input to output mappings. 
+The key characteristic of suprevised learning is that you give your learning algorithms to learn from . That includes right answers , which mean , the correc  label of 'y' for a given input of 'x' . Here , x is the input and y is the desired outputs that we give  .
+  By seeing the correct pairs of input x and desired output label y , the learing algorithm eventually learns to take just the input alone without the output label and gives a  resonably accurate pediction of the output .
+
+common examples of supervised machine learning :
+
+Input (x)     output (y)      Application
+
+email         spam            spam filtering
+audio         texttranscripts speech recognition
+Englist       Spanish         machine translation
+ad,user info  click>(0/1)     online advertising
+image,radar   pos'n of cars   self-driving cars
+phone image   defects(0/1)    visual representation
+
+
+The other best example of supervised machine learning are :
+ 1. Regression : Predict a number form infinitely many possible outputs .
+
+ Example :- Housing prices prediction .
+
+these gives of idea how the algorthim fits curves or lines with the given inputs and deserved outputs . finally , it gives us the output for any given input using the data that we provided ie., x and y  from the graph.
+
+
+
+ 2. classification : Predict categories from small number of possible outputs . It has a very small number of possible outputs which make it different from regression . 
+ " So to sumarize classification algorithms we predict the categories. "
+
+ Example :- Breast Cancer detection .
+
+In this example , there are only two possible outputs the cancer may be Benign or Malignant . we can also provide as many inputs as we can for example we can gives the age , the sizes of tumor .
+
+
+
+
+
+
+
+
+
+
+
+
+

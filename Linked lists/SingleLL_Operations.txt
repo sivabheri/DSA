@@ -1,0 +1,264 @@
+creation of linked list :
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Node{
+  public:
+  int data;
+  Node* next;
+  
+  Node(int d){
+    data =d;
+    next = nullptr;
+  }
+  
+
+};
+
+Node* head = nullptr;
+
+void insert(int newdata){
+  Node* newNode = new Node(newdata);
+  newNode->next = head;
+  head = newNode;
+  
+}
+
+void display(){
+  
+  Node* ptr = head;
+  
+  while(ptr!=nullptr){
+    cout<< ptr->data <<" ";
+    ptr = ptr->next;
+  }
+}
+
+
+int main(){
+  
+  vector<int> arr = {1,2,3,4,5};
+  
+  for(int i=0;i<arr.size();++i){
+    insert(arr[i]);
+  }
+  
+  cout<<"The linked list is : ";
+  display();
+  
+}
+
+
+To insert at any position :
+
+void insertAtPos(int newdata,int pos){
+  
+  if (pos<0){
+    cout<< " Invalid position";
+    return;
+  }
+  
+  if (pos==0){
+    insert(newdata);
+    return;
+  }
+  
+  Node* newNode = new Node(newdata);
+  Node* curr = head;
+  Node* prev = nullptr;
+  
+  int curpos = 0 ;
+  
+// To get the previous node we init prev to nullptr and curr to head
+// Now , while moving forward we should set prev= cur and cur = cur->next
+  while ( curr!=nullptr && curpos<pos){
+    
+    prev = curr;
+    curr = curr->next;
+    curpos++;
+  }
+
+  //insertion at the end
+  if (curpos < pos){
+    prev->next = newNode;
+  } // insertion in the middle of LL 
+  else{
+    prev->next = newNode;
+    newNode->next = curr;
+  }
+}
+
+Deletion at any position :
+
+void deleteAtPos(int pos){
+  
+  if (pos<0){
+    cout<< "Invalid pos cant Delete" ;
+    return;
+  }
+  
+  if (head==nullptr){
+    cout<< "Empty list cant be deleted";
+    return;
+  }
+  
+  Node* curr = head;
+  Node* prev = nullptr;
+  int curpos = 0 ;
+  
+  while(curr!=nullptr && curpos<pos){
+    prev = curr;
+    curr = curr->next;
+    curpos++;
+  }
+  if (curr == nullptr){
+    cout << "Invalid position";
+    return;
+  }
+  // when prev = nullptr which means there is only one node 
+  if (prev==nullptr){
+    head = head->next;
+  }
+  else{
+    // deleting at any other position
+    prev->next = curr->next;
+  }
+  delete curr;
+}
+
+
+
+
+
+
+complete code :
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Node{
+  public:
+  int data;
+  Node* next;
+  
+  Node(int d){
+    data =d;
+    next = nullptr;
+  }
+  
+
+};
+
+Node* head = nullptr;
+
+void insert(int newdata){
+  Node* newNode = new Node(newdata);
+  newNode->next = head;
+  head = newNode;
+  
+}
+
+void insertAtPos(int newdata,int pos){
+  
+  if (pos<0){
+    cout<< " Invalid position";
+    return;
+  }
+  
+  if (pos==0){
+    insert(newdata);
+    return;
+  }
+  
+  Node* newNode = new Node(newdata);
+  Node* curr = head;
+  Node* prev = nullptr;
+  
+  int curpos = 0 ;
+  
+  while ( curr!=nullptr && curpos<pos){
+    
+    prev = curr;
+    curr = curr->next;
+    curpos++;
+  }
+  
+  if (curpos < pos){
+    prev->next = newNode;
+  }
+  else{
+    prev->next = newNode;
+    newNode->next = curr;
+  }
+}
+
+void deleteAtPos(int pos){
+  
+  if (pos<0){
+    cout<< "Invalid pos cant Delete" ;
+    return;
+  }
+  
+  if (head==nullptr){
+    cout<< "Empty list cant be deleted";
+    return;
+  }
+  
+  Node* curr = head;
+  Node* prev = nullptr;
+  int curpos = 0 ;
+  
+  while(curr!=nullptr && curpos<pos){
+    prev = curr;
+    curr = curr->next;
+    curpos++;
+  }
+  if (curr == nullptr){
+    cout << "Invalid position";
+    return;
+  }
+  // when prev = nullptr which means there is only one node 
+  if (prev==nullptr){
+    head = head->next;
+  }
+  else{
+    // deleting at any other position
+    prev->next = curr->next;
+  }
+  delete curr;
+}
+
+void display(){
+  
+  Node* ptr = head;
+  
+  while(ptr!=nullptr){
+    cout<< ptr->data <<" ";
+    ptr = ptr->next;
+  }
+}
+
+
+int main(){
+  
+  vector<int> arr = {1,2,3,4,5};
+  
+  for(int i=0;i<arr.size();++i){
+    insert(arr[i]);
+  }
+  cout<<"The linked list is : \n";
+
+  display();
+  
+  int num = 99;
+  int pos = 2;
+  insertAtPos(num,pos);
+   cout<<"The linked list is : \n";
+  display();
+  
+  deleteAtPos(3);
+  cout<<"The linked list is : \n";
+  display();
+  
+}

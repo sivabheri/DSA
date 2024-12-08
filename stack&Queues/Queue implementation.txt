@@ -1,0 +1,188 @@
+// Queues Using Arrays
+#include <bits/stdc++.h>
+using namespace std;
+
+class Queue {
+private:
+    int front, rear, capacity;
+    int* array;
+
+public:
+    Queue(int size) {
+        capacity = size;
+        front = rear = -1;
+        array = new int[capacity];
+    }
+
+    ~Queue() {
+        delete[] array;
+    }
+
+    bool isEmpty() {
+        return front == -1;
+    }
+
+    bool isFull() {
+        return front == (rear + 1) || rear+1 == capacity ;
+    }
+
+    void enqueue(int item) {
+        if (isFull()) {
+            cout << "Queue is full. Cannot enqueue " << item << endl;
+            return;
+        }
+
+        if (isEmpty()) {
+            front = rear = 0;
+        } else {
+            rear = (rear + 1) ;
+        }
+
+        array[rear] = item;
+        cout << item << " enqueued to the queue." << endl;
+    }
+
+    void dequeue() {
+        if (isEmpty()) {
+            cout << "Queue is empty. Cannot dequeue." <<endl;
+            return;
+        }
+
+        int item = array[front];
+        if (front == rear) {
+            front = rear = -1;
+        } else {
+            front = (front + 1) ;
+        }
+
+        cout << item << " dequeued from the queue." <<endl;
+    }
+
+    int peek() {
+        if (isEmpty()) {
+            cout << "Queue is empty. Cannot peek." << endl;
+            return -1;
+            }
+
+        return array[front];
+    }
+};
+
+int main() {
+    Queue myQueue(5);
+
+    myQueue.enqueue(10);
+    myQueue.enqueue(20);
+    myQueue.enqueue(30);
+    myQueue.enqueue(40);
+
+    cout << "Front element: " << myQueue.peek() << endl;
+
+    myQueue.dequeue();
+    myQueue.dequeue();
+
+    cout << "Front element after dequeue: " << myQueue.peek() << endl;
+
+    myQueue.enqueue(50);
+    myQueue.enqueue(60);
+
+    return 0;
+}
+
+
+// Queues using LinkedLists
+
+#include <bits/stdc++.h>
+using namespace std;
+
+class Node {
+public:
+    int data;
+    Node* next;
+
+    Node(int value) : data(value), next(NULL) {}
+};
+
+class Queue{
+  
+  private:
+  
+  Node* front;
+  Node* rear;
+  
+  public:
+  int size=0;
+  Queue(){
+    front = NULL;
+    rear = NULL;
+  } 
+  
+  bool isEmpty(){
+    
+     return front==NULL;
+  }
+  
+  void enqueue(int newdata){
+    Node * newnode = new Node(newdata);
+    if(newnode==NULL){
+      return;
+    }
+    if(isEmpty()){
+      front=rear=newnode;
+    }
+    else{
+      rear->next = newnode;
+      rear = newnode;
+      
+    }
+    size++;
+  }
+  
+  void dequeue(){
+    
+    if(isEmpty()){
+      cout<<"Empty cant delete \n";
+      return;
+    }
+    cout<<"The deleted element is : "<< front->data<< endl;
+    Node* temp = front;
+    front = front->next;
+    
+    size--;
+    delete temp;
+  }
+  
+  int peek(){
+    
+    if(isEmpty()){
+      return -1;
+    }
+    return front->data;
+  }
+  
+  void display(){
+    Node* temp = front;
+    
+    while(temp){
+      cout<< temp->data << " ";
+      temp = temp->next;
+    }
+    cout<<endl;
+  }
+};
+
+int main(){
+  
+    Queue q;
+    q.enqueue(10);
+    q.enqueue(20);
+    cout<<"size of Queue : "<<q.size<<endl;
+    q.display();
+    
+    
+    q.dequeue();
+    cout<<"size of Queue : "<<q.size<<endl;
+    q.display();
+  
+  return 0;
+}
