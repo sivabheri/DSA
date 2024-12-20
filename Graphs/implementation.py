@@ -1,4 +1,4 @@
-class Graph:
+	class Graph:
 	''' Undirected Graphs using adjacency Lists'''
 	def __init__(self):
 		self.graph = {}
