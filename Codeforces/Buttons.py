@@ -31,10 +31,17 @@ Example input:
 1 2 3
 6 6 9
 2 2 8
+
+output:
+First
+First
+Second
+First
+Second
 '''
 class Test:
 
-	def solve1(self):
+	def solve1(self): # TLE
 
 		a, b, c = map(int,input().split())
 
@@ -56,7 +63,7 @@ class Test:
 				print("First Wins")
 				break
 			
-	def solve2(self):
+	def solve2(self): # Accepted
 
 		a, b, c = map(int,input().split())
 
