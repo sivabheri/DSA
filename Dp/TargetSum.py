@@ -1,5 +1,6 @@
 # LEETCODE - 494
-
+# Target sum - (0/1- KnapSack Variation)
+# similar to Count Subsets with given difference.
 ''' 
 we will be given an array of intergers and a target value.
 
@@ -42,7 +43,37 @@ class Solution:
         return backtrack(0,0)
         # we will get TLE
 
-    # optimal : Dp
+    # optimal : Dp : Based on Count Subsetsum Difference Problem
+    def method3(self,arr,required_sum):
+    	n = len(arr)
+    	
+    	# s1 + s2 = total
+    	# s1 - s2 = diff->sum
+    	# find count of s1 for subsetsum == total+diff //2
+    	total = sum(arr)
+    	
+    	target = (total+required_sum)//2
+
+    	dp = [[0]*(target+1) for _ in range(n+1)]
+    	for i in range(n+1):
+    		for j in range(target+1):
+    			if i==0:
+    				dp[i][j] = 0
+    			if j==0:
+    				dp[i][j] = 1
+    	
+
+    	for i in range(1,n+1):
+    		for j in range(1,target+1):
+
+    			if (arr[i-1]<=j):
+    				dp[i][j] = dp[i-1][j-arr[i-1]] + dp[i-1][j]
+    			else:
+    				dp[i][j] = dp[i-1][j]
+
+
+    	return dp[n][target]
+
     def method2(self, nums: List[int], target: int) -> int:
         
 
@@ -141,7 +172,6 @@ class Solution:
 		dp = [1, 2, 1, 2, 1]
 		The number of ways to form sumA = 4 is dp[4] = 1.
     	'''
-    	
 
 if __name__ == '__main__':
 	
@@ -151,6 +181,6 @@ if __name__ == '__main__':
 
 	target = 3
 
-	ways = obj.method2(arr,target)
+	ways = obj.method3(arr,target)
 
 	print(f'The total no of ways to get the target {target} is : {ways}')
