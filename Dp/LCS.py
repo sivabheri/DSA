@@ -79,6 +79,53 @@ class Solution:
         			dp[i][j] = max(dp[i-1][j], dp[i][j-1])
         return dp[n][m]
 
+    def printSubstring(self,s1,s2):
+
+        # use same code of LCS not above with little variation
+
+        # code here
+        n = len(s1)
+        m = len(s2)
+        
+        # tabulation
+        dp = [[0]*(m+1) for _ in range(n+1)]
+        
+        # base condition
+        for i in range(n+1):
+            for j in range(m+1):
+                if i==0 or j==0: # when either of the strings is empty then no LCstring
+                    dp[i][j]=0
+        # store the max length
+        max_len = 0
+        # choice diagram
+        for i in range(1,n+1):
+            for j in range(1,m+1):
+                if s1[i-1]==s2[j-1]:
+                    dp[i][j] = 1 + dp[i-1][j-1]
+                else:
+                    dp[i][j] = 0  + max(dp[i-1][j],dp[i][j-1])# This is the code variation with LCS, 
+                    # when there is discontinuity then no common string is there 
+                    # so, length is set to 0
+        for i in dp:
+            print(i,end='\n')
+
+        ans = ''
+        i,j = n,m 
+        while(i>0 and j>0):
+
+            if s1[i-1] == s2[j-1]:
+                ans+=s1[i-1]
+                i-=1
+                j-=1
+            else :
+                if (dp[i][j-1] > dp[i-1][j]):
+                    j-=1
+                else:
+                    i-=1
+
+        return ans[::-1]
+        
+
 if __name__ == '__main__':
 	
 	obj = Solution()
@@ -86,4 +133,6 @@ if __name__ == '__main__':
 	text2 = input()
 	
 	ans = obj.longestCommonSubsequence(text1,text2)
+    res = obj.printSubstring(text1,text2)
+    print(f'Longest common Subsequence : {res}')
 	print(f"The Length longest Common Subsequence in both the strings is: {ans}")
