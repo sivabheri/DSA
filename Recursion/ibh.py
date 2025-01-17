@@ -2,7 +2,7 @@
 
 ''' 
 Methods:
-1 . IBH : Induction - Base Condition - Hypothesis
+1 . IBH : Induction - Base Condition - Hypothesis : Mainly Trees and Linked Lists
 2 . IP-OP
 3 . Choice Diagram
 
