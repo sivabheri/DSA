@@ -12,6 +12,7 @@ def sorting(arr):
 		cur_last = arr.pop()
 		insert_last(arr,last)
 		arr.append(cur_last)	
+		
 	def met(arr,n):
 
 		if n<=1:
