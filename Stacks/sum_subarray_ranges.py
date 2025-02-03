@@ -87,6 +87,8 @@ class Solution:
             minc += nums[i] * (nextsmaller[i] - i) * (i - prevsmaller[i]) 
         
         return maxc - minc
+
+        
 if __name__ == '__main__':
 	
 	arr = [1,2,3]
