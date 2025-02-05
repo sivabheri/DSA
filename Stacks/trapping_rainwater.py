@@ -45,9 +45,29 @@ class Solution:
                 cap+=right_max - height[r]
         return cap
 
+    def maxWater(self, arr):
+        # code here
+        n = len(arr)
+        maxl = [0] * n
+        for i in range(1, n):
+            maxl[i] = max(maxl[i - 1], arr[i])
+        
+        maxr = [0] * n
+        for i in range(n - 2, -1, -1):
+            maxr[i] = max(maxr[i + 1], arr[i])
+            
+        water = [0]*n
+        # no water on 1st and last building so we start from next buildings
+        for i in range(1, n - 1):
+            # water on each building is min(max on left of i, max on right of i) - height of i
+            water[i] += min(maxl[i - 1], maxr[i + 1]) - arr[i]
+        
+        return sum(water)
+        
+
 if __name__ == '__main__':
     
     height = [0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]
     
     obj = Solution()
-    print(obj.trap(height))  # Output: 6
+    print(obj.maxWater(height))  # Output: 6
